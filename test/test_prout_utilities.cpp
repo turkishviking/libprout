@@ -1,9 +1,10 @@
+#include <libprout.h>
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    cout << prout::getTimeStamp() << endl;
     return 0;
 }

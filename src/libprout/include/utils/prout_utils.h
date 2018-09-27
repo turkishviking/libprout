@@ -9,6 +9,8 @@
 #include <memory>
 #include <sys/stat.h>
 #include <cstring>
+#include <filesystem>
+
 namespace prout
 {
 
@@ -48,36 +50,31 @@ static std::string getUUID()
             (std::chrono::system_clock::now().time_since_epoch()).count()));
 }
 
-static std::vector<std::string> listDirs(const std::string& dir)
-{
-    std::vector<std::string> files;
-    std::shared_ptr<DIR> directory_ptr(opendir(dir.c_str()), [](DIR* dir){ dir && closedir(dir); });
-    struct dirent *dirent_ptr;
-    if (!directory_ptr)
-    {
-        std::cout << "Error opening : " << std::strerror(errno) << dir << std::endl;
-        return files;
-    }
-
-    while ((dirent_ptr = readdir(directory_ptr.get())) != nullptr)
-    {
-        if( strcmp(dirent_ptr->d_name , ".") != 0 && strcmp(dirent_ptr->d_name , "..") != 0 )
-            files.push_back(std::string(dirent_ptr->d_name));
-    }
-    return files;
-}
-
-static std::vector<std::string> listFiles(const std::string& name)
+static std::vector<std::string> listDirs(const std::string& pathName)
 {
     std::vector<std::string> v;
-    DIR* dirp = opendir(name.c_str());
-    struct dirent * dp;
-    while ((dp = readdir(dirp)) != NULL) {
-        if( strcmp(dp->d_name , ".") != 0 && strcmp(dp->d_name , "..") != 0 )
-            v.push_back(dp->d_name);
+    for (auto & p : std::filesystem::directory_iterator(pathName))
+    {
+        if(p.is_directory())
+        {
+            std::filesystem::path path = p.path();
+            v.push_back(path.u8string());
+        }
     }
-    closedir(dirp);
+    return v;
+}
 
+static std::vector<std::string> listFiles(const std::string& pathName)
+{
+    std::vector<std::string> v;
+    for (auto & p : std::filesystem::directory_iterator(pathName))
+    {
+        if(p.is_regular_file())
+        {
+            std::filesystem::path path = p.path();
+            v.push_back(path.u8string());
+        }
+    }
     return v;
 }
 

@@ -4,12 +4,12 @@ namespace prout {
 
 File::File(std::string path, std::string writeMode)
 {
-    std::ofstream::openmode mode;
     if(writeMode == "w")
-        mode = std::ofstream::trunc;
+        mode = std::ofstream::in | std::ofstream::out | std::ofstream::trunc;
     else
-        mode = std::ofstream::app;
-    file.open(path, std::ofstream::in | std::ofstream::out | mode);
+        mode = std::ofstream::in | std::ofstream::out | std::ofstream::app;
+    fpath = path;
+    file.open(fpath, mode);
 }
 
 std::string File::read()
@@ -36,6 +36,12 @@ std::vector<std::string> File::readLines()
         }
     }
     return res;
+}
+
+void File::reload()
+{
+    file.close();
+    file.open(fpath);
 }
 
 void File::write(std::string line)

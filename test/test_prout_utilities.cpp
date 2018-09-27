@@ -29,5 +29,15 @@ int main()
     cout << "\n--- Testing print function... ---" << endl;
     prout::print("bite", 255, 'g');
 
+    cout << "\n--- Testing replace function... ---" << endl;
+    cout << "caca " << prout::replace("caca", "a", "ul") << endl;;
+
+    cout << "\n--- Testing split string function... ---" << endl;
+    cout << "pirs__sucks_ducks:" << endl;
+    for(auto &words : prout::split("pirs__sucks_ducks", "_"))
+        cout << words << endl;
+
+
+
     return 0;
 }

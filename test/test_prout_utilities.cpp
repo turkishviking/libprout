@@ -42,24 +42,35 @@ int main()
     prout::File f(path, "w");
     cout << "writing caca in " << path << endl;
     f.write("caca");
+    f.reload();
+    cout << "reading " << path << endl;
+    cout << f.read() << endl;
     f.close();
 
-    cout << "reading " << path << endl;
-    prout::File f2(path);
-    cout << f2.read() << endl;
-    f2.close();
-
-    prout::File f3(path, "w");
+    prout::File f2(path, "w");
     cout << "writing list of 10 caca in " << path << endl;
+    std::vector<std::string> caca;
     for(size_t i=0;i<10;i++)
-        f3.write("caca\n");
-    f3.close();
+    {
+        f2.write("caca\n");
+        caca.push_back("caca");
+    }
+    f2.reload();
 
     cout << "reading list of 10 caca in" << path << endl;
-    prout::File f4(path);
-    for(auto line : f4.readLines())
+    for(auto line : f2.readLines())
         cout << line << endl;;
-    f4.close();
+    f2.close();
+
+    cout << "writing list of 10 caca as vector in " << path << endl;
+    prout::File f3(path, "w");
+    f3.write(caca);
+    f3.reload();
+
+    cout << "reading list of 10 caca in" << path << endl;
+    for(auto line : f3.readLines())
+        cout << line << endl;;
+    f3.close();
 
     return 0;
 }

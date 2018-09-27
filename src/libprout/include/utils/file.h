@@ -19,8 +19,11 @@ public:
     void write(std::string line);
     void write(std::vector<std::string> lines);
     void close();
+    void reload();
 private:
     std::fstream file;
+    std::string fpath;
+    std::ofstream::openmode mode;
 };
 
 

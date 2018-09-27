@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-
+set(CMAKE_CXX_STANDARD 17)
 ### CUSTOMIZATION STEPS
 # 1. Change the argument to project() with the name of your library/package
 #    (it will be the one used for find_package() call)
@@ -102,6 +102,7 @@ option(BUILD_TESTING "Create tests using CMake" OFF)
 if(BUILD_TESTING)
     enable_testing()
 endif()
+
 
 # Enable RPATH support for installed binaries and libraries
 include(AddInstallRPATHSupport)

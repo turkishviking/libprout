@@ -37,7 +37,29 @@ int main()
     for(auto &words : prout::split("pirs__sucks_ducks", "_"))
         cout << words << endl;
 
+    cout << "\n--- Testing file functions... ---" << endl;
+    std::string path = "/tmp/test_prout";
+    prout::File f(path, "w");
+    cout << "writing caca in " << path << endl;
+    f.write("caca");
+    f.close();
 
+    cout << "reading " << path << endl;
+    prout::File f2(path);
+    cout << f2.read() << endl;
+    f2.close();
+
+    prout::File f3(path, "w");
+    cout << "writing list of 10 caca in " << path << endl;
+    for(size_t i=0;i<10;i++)
+        f3.write("caca\n");
+    f3.close();
+
+    cout << "reading list of 10 caca in" << path << endl;
+    prout::File f4(path);
+    for(auto line : f4.readLines())
+        cout << line << endl;;
+    f4.close();
 
     return 0;
 }

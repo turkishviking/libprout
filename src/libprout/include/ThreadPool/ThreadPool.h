@@ -57,7 +57,6 @@ namespace prout {
             }
         }
 
-
     private:
         void infiniteLoop() {
             bool loop = true;

@@ -26,5 +26,8 @@ int main()
     cout << "\n--- Testing making folder... ---" << endl;
     prout::makeFolder("testFolder");
 
+    cout << "\n--- Testing print function... ---" << endl;
+    prout::print("bite", 255, 'g');
+
     return 0;
 }

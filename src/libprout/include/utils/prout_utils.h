@@ -1,9 +1,40 @@
 #ifndef UTILS_H
 #define UTILS_H
-
+#include <vector>
+#include <chrono>
+#include <iostream>
+#include <dirent.h>
+#include <sstream>
+#include <algorithm>
+#include <memory>
+#include <sys/stat.h>
+#include <cstring>
 namespace prout
 {
 
+namespace
+{
+
+    template <class T>
+    void print_(T &&arg)
+    {
+      std::cout << arg << ' ';
+    }
+    template <class T, class ... Args>
+    void print_(T && val, Args &&... args)
+    {
+      print_(std::forward<T>(val));
+      print_(std::forward<Args>(args)...);
+    }
+
+
+}
+
+template <class ... Args>
+void print(Args &&... args)
+{
+  print_(std::forward<Args>(args)...);
+}
 
 static long getTimeStamp()
 {

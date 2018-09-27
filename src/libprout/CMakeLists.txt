@@ -1,4 +1,6 @@
-# This is the "physical" (i.e. real) name of the library.
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17)
+    # This is the "physical" (i.e. real) name of the library.
 # The actual file name of the library built is constructed based on conventions
 # of the native platform, such as lib<LIBRARY_TARGET_NAME>.a,
 # lib<LIBRARY_TARGET_NAME>.dylib or <LIBRARY_TARGET_NAME>.lib.
@@ -44,8 +46,9 @@ add_library(${LIBRARY_TARGET_NAME} ${${LIBRARY_TARGET_NAME}_SRC} ${${LIBRARY_TAR
 # Set two minimum target properties for the library.
 # See https://cmake.org/cmake/help/latest/command/set_target_properties.html
 # Properties are: 1) Library version number 2) list of corresponding public headers
-set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES VERSION       ${${PROJECT_NAME}_VERSION}
-                                                        PUBLIC_HEADER "${${LIBRARY_TARGET_NAME}_HDR}")
+set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES
+        VERSION ${${PROJECT_NAME}_VERSION}
+        PUBLIC_HEADER "${${LIBRARY_TARGET_NAME}_HDR}")
 
 # Specify include directories for both compilation and installation process.
 # The $<INSTALL_PREFIX> generator expression is useful to ensure to create 

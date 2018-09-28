@@ -9,7 +9,7 @@
 #include <memory>
 #include <sys/stat.h>
 #include <cstring>
-#include <filesystem>
+#include <experimental/filesystem>
 
 namespace prout
 {
@@ -50,11 +50,11 @@ static std::string getUUID()
 static std::vector<std::string> listDirs(const std::string&& pathName)
 {
     std::vector<std::string> v;
-    for (auto & p : std::filesystem::directory_iterator(pathName))
+    for (auto & p : std::experimental::filesystem::directory_iterator(pathName))
     {
-        if(p.is_directory())
+        if(std::experimental::filesystem::is_directory(p))
         {
-            std::filesystem::path path = p.path();
+            std::experimental::filesystem::path path = p.path();
             v.push_back(path.u8string());
         }
     }
@@ -64,11 +64,11 @@ static std::vector<std::string> listDirs(const std::string&& pathName)
 static std::vector<std::string> listFiles(const std::string&& pathName)
 {
     std::vector<std::string> v;
-    for (auto & p : std::filesystem::directory_iterator(pathName))
+    for (auto & p : std::experimental::filesystem::directory_iterator(pathName))
     {
-        if(p.is_regular_file())
+        if(std::experimental::filesystem::is_regular_file(p))
         {
-            std::filesystem::path path = p.path();
+            std::experimental::filesystem::path path = p.path();
             v.push_back(path.u8string());
         }
     }

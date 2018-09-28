@@ -14,7 +14,6 @@ set(LIBRARY_TARGET_NAME ${PROJECT_NAME})
 # List of CPP (source) library files.
 set(${LIBRARY_TARGET_NAME}_SRC
         src/fuckme.cpp
-        src/utils/file.cpp
         src/utils/Chrono.cpp
 )
 

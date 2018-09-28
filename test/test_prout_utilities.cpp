@@ -47,32 +47,29 @@ int main()
     f.reload();
     cout << "reading " << path << endl;
     cout << f.read() << endl;
-    f.close();
-
-    prout::File f2(path, "w");
+    f.clear();
     cout << "writing list of 10 caca in " << path << endl;
-    std::vector<std::string> caca;
+    std::vector<int> caca;
     for(size_t i=0;i<10;i++)
     {
-        f2.write("caca\n");
-        caca.push_back("caca");
+        f.write("caca\n");
+        caca.push_back(i);
     }
-    f2.reload();
+    f.reload();
 
     cout << "reading list of 10 caca in" << path << endl;
-    for(auto line : f2.readLines())
+    for(auto line : f.readLines())
         cout << line << endl;;
-    f2.close();
+    f.clear();
 
-    cout << "writing list of 10 caca as vector in " << path << endl;
-    prout::File f3(path, "w");
-    f3.write(caca);
-    f3.reload();
+    cout << "writing list of 10 int as vector in " << path << endl;
+    f.write(caca);
+    f.reload();
 
     cout << "reading list of 10 caca in" << path << endl;
-    for(auto line : f3.readLines())
+    for(auto line : f.readLines())
         cout << line << endl;;
-    f3.close();
+    f.close();
 
 
     cout << "\n--- Testing chrono function... ---" << endl;

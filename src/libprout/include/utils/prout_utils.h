@@ -9,31 +9,30 @@
 #include <memory>
 #include <sys/stat.h>
 #include <cstring>
+#include <filesystem>
+
 namespace prout
 {
 
 namespace
 {
-
     template <class T>
     void print_(T &&arg)
     {
-      std::cout << arg << ' ';
+        std::cout << arg << ' ';
     }
     template <class T, class ... Args>
     void print_(T && val, Args &&... args)
     {
-      print_(std::forward<T>(val));
-      print_(std::forward<Args>(args)...);
+        print_(std::forward<T>(val));
+        print_(std::forward<Args>(args)...);
     }
-
-
 }
 
 template <class ... Args>
 void print(Args &&... args)
 {
-  print_(std::forward<Args>(args)...);
+    print_(std::forward<Args>(args)...);
 }
 
 static long getTimeStamp()
@@ -48,41 +47,36 @@ static std::string getUUID()
             (std::chrono::system_clock::now().time_since_epoch()).count()));
 }
 
-static std::vector<std::string> listDirs(const std::string& dir)
-{
-    std::vector<std::string> files;
-    std::shared_ptr<DIR> directory_ptr(opendir(dir.c_str()), [](DIR* dir){ dir && closedir(dir); });
-    struct dirent *dirent_ptr;
-    if (!directory_ptr)
-    {
-        std::cout << "Error opening : " << std::strerror(errno) << dir << std::endl;
-        return files;
-    }
-
-    while ((dirent_ptr = readdir(directory_ptr.get())) != nullptr)
-    {
-        if( strcmp(dirent_ptr->d_name , ".") != 0 && strcmp(dirent_ptr->d_name , "..") != 0 )
-            files.push_back(std::string(dirent_ptr->d_name));
-    }
-    return files;
-}
-
-static std::vector<std::string> listFiles(const std::string& name)
+static std::vector<std::string> listDirs(const std::string&& pathName)
 {
     std::vector<std::string> v;
-    DIR* dirp = opendir(name.c_str());
-    struct dirent * dp;
-    while ((dp = readdir(dirp)) != NULL) {
-        if( strcmp(dp->d_name , ".") != 0 && strcmp(dp->d_name , "..") != 0 )
-            v.push_back(dp->d_name);
+    for (auto & p : std::filesystem::directory_iterator(pathName))
+    {
+        if(p.is_directory())
+        {
+            std::filesystem::path path = p.path();
+            v.push_back(path.u8string());
+        }
     }
-    closedir(dirp);
+    return v;
+}
 
+static std::vector<std::string> listFiles(const std::string&& pathName)
+{
+    std::vector<std::string> v;
+    for (auto & p : std::filesystem::directory_iterator(pathName))
+    {
+        if(p.is_regular_file())
+        {
+            std::filesystem::path path = p.path();
+            v.push_back(path.u8string());
+        }
+    }
     return v;
 }
 
 
-static void makeFolder(std::string folder)
+static void makeFolder(std::string&& folder)
 {
     if (mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == -1)
     {
@@ -96,8 +90,29 @@ static void makeFolder(std::string folder)
     }
 }
 
+static std::string replace(std::string&& str, const std::string&& from, const std::string&& to) {
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
+    }
+    return str;
+}
 
-
+static std::vector<std::string> split(std::string &&str, std::string delimiter)
+{
+    size_t pos = 0;
+    std::string token;
+    std::vector<std::string> result;
+    while ((pos = str.find(delimiter)) != std::string::npos) {
+        token = str.substr(0, pos);
+        if(token != "")
+            result.push_back(token);
+        str.erase(0, pos + delimiter.length());
+    }
+    result.push_back(str);
+    return result;
+}
 
 
 }

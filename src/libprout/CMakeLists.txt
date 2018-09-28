@@ -14,6 +14,7 @@ set(LIBRARY_TARGET_NAME ${PROJECT_NAME})
 # List of CPP (source) library files.
 set(${LIBRARY_TARGET_NAME}_SRC
         src/fuckme.cpp
+        src/utils/file.cpp
         src/Chrono/Chrono.cpp
 )
 
@@ -57,6 +58,7 @@ set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES
 target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                          "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
 
+
 # If you used find_package() you need to use target_include_directories() and/or
 # target_link_libraries(). As explained previously, depending on the imported
 # objects, you may need to call either or both:
@@ -67,6 +69,11 @@ target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CM
 #   target_link_libraries(${LIBRARY_TARGET_NAME} FooPackage_LIBRARIES::FooPackage_LIBRARIES)
 
 # Specify installation targets, typology and destination folders.
+
+target_link_libraries(  ${LIBRARY_TARGET_NAME}
+                        stdc++fs
+                     )
+
 install(TARGETS ${LIBRARY_TARGET_NAME}
         EXPORT  ${PROJECT_NAME}
         LIBRARY       DESTINATION "${CMAKE_INSTALL_LIBDIR}"                            COMPONENT shlib

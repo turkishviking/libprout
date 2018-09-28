@@ -37,6 +37,11 @@ public:
                 str += line;
             }
         }
+        else
+        {
+            std::cerr << "try to read on closed file, exiting, you're fucking noob" << std::endl;
+            exit(42);
+        }
         return str;
     }
 
@@ -50,6 +55,11 @@ public:
                 lines.push_back(line);
             }
         }
+        else
+        {
+            std::cerr << "try to read on closed file, exiting, you're fucking noob" << std::endl;
+            exit(42);
+        }
         return lines;
     }
 
@@ -58,14 +68,26 @@ public:
     {
         if(file.is_open())
             file << line;
+        else
+        {
+            std::cerr << "try to write on closed file, exiting, you're fucking noob!" << std::endl;
+            exit(42);
+        }
     }
 
     template<typename type>
     void write(std::vector<type> lines)
     {
         if(file.is_open())
+        {
             for(auto &line : lines)
                 file << line << "\n";
+        }
+        else
+        {
+            std::cerr << "try to write on closed file, exiting, you're fucking noob!" << std::endl;
+            exit(42);
+        }
     }
 
     void close()

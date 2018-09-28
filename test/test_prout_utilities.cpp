@@ -49,11 +49,11 @@ int main()
     cout << f.read() << endl;
     f.clear();
     cout << "writing list of 10 caca in " << path << endl;
-    std::vector<std::string> caca;
+    std::vector<int> caca;
     for(size_t i=0;i<10;i++)
     {
         f.write("caca\n");
-        caca.push_back("caca");
+        caca.push_back(i);
     }
     f.reload();
 
@@ -62,7 +62,7 @@ int main()
         cout << line << endl;;
     f.clear();
 
-    cout << "writing list of 10 caca as vector in " << path << endl;
+    cout << "writing list of 10 int as vector in " << path << endl;
     f.write(caca);
     f.reload();
 

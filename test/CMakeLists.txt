@@ -1,7 +1,10 @@
+set(CMAKE_CXX_STANDARD 17)
+
 set(TEST_TARGET_NAME test_prout_utilities)
 
 set(${TEST_TARGET_NAME}_SRC
         test_prout_utilities.cpp
+        ChronoTest.cpp
 )
 include_directories(../src/libprout/include)
 

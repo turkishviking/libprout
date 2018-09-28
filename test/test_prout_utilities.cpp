@@ -3,6 +3,8 @@
 
 using namespace std;
 
+void testChrono();
+
 int main()
 {
     cout << "--- Testing Timestamp... ---" << endl;
@@ -28,6 +30,10 @@ int main()
 
     cout << "\n--- Testing print function... ---" << endl;
     prout::print("bite", 255, 'g');
+
+
+    cout << "\n\n--- Testing chrono function... ---" << endl;
+    testChrono();
 
     return 0;
 }

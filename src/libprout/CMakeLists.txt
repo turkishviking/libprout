@@ -14,12 +14,13 @@ set(LIBRARY_TARGET_NAME ${PROJECT_NAME})
 # List of CPP (source) library files.
 set(${LIBRARY_TARGET_NAME}_SRC
         src/fuckme.cpp
+        src/Chrono/Chrono.cpp
 )
 
 # List of HPP (header) library files.
 set(${LIBRARY_TARGET_NAME}_HDR
         include/libprout.h
-)
+        include/Chrono/Chrono.h)
 
 # You can add an external dependency using the find_package() function call
 # See: https://cmake.org/cmake/help/latest/command/find_package.html

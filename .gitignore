@@ -73,6 +73,8 @@ Thumbs.db
 *.exe
 
 cmake-build-debug/*
+cmake-build-release/*
+cmake-build-test/*
 src/libprout/cmake-build-debug/*
 .idea/*
 build/*

@@ -38,6 +38,13 @@ std::vector<std::string> File::readLines()
     return res;
 }
 
+void File::clear()
+{
+    file.close();
+    mode = std::ofstream::in | std::ofstream::out | std::ofstream::trunc;
+    file.open(fpath, mode);
+}
+
 void File::reload()
 {
     file.close();

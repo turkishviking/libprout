@@ -20,6 +20,7 @@ public:
     void write(std::vector<std::string> lines);
     void close();
     void reload();
+    void clear();
 private:
     std::fstream file;
     std::string fpath;

@@ -5,7 +5,7 @@
 #ifndef LIBPROUT_CHRONO_H
 #define LIBPROUT_CHRONO_H
 
-#include <utils/prout_utils.h>
+#include "prout_utils.h"
 #include <unordered_map>
 
 namespace prout {

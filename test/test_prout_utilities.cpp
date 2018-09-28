@@ -75,7 +75,7 @@ int main()
     f3.close();
 
 
-    cout << "\n\n--- Testing chrono function... ---" << endl;
+    cout << "\n--- Testing chrono function... ---" << endl;
     testChrono();
 
     return 0;

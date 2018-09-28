@@ -30,7 +30,6 @@ int main()
 
     cout << "\n--- Testing print function... ---" << endl;
     prout::print("bite", 255, 'g');
-
     cout << "\n--- Testing replace function... ---" << endl;
     cout << "caca " << prout::replace("caca", "a", "ul") << endl;;
 
@@ -63,7 +62,6 @@ int main()
     f.clear();
 
     cout << "writing list of 10 int as vector in " << path << endl;
-    f.close();
     f.write(caca);
     f.reload();
 

@@ -11,9 +11,6 @@
 #include <cstring>
 #include <experimental/filesystem>
 
-namespace prout
-{
-
 namespace
 {
     template <class T>
@@ -28,6 +25,11 @@ namespace
         print_(std::forward<Args>(args)...);
     }
 }
+
+
+namespace prout
+{
+
 
 template <class ... Args>
 void print(Args &&... args)

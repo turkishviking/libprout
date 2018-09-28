@@ -63,6 +63,7 @@ int main()
     f.clear();
 
     cout << "writing list of 10 int as vector in " << path << endl;
+    f.close();
     f.write(caca);
     f.reload();
 

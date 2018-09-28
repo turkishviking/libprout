@@ -3,6 +3,8 @@
 
 using namespace std;
 
+void testChrono();
+
 int main()
 {
     cout << "--- Testing Timestamp... ---" << endl;
@@ -68,6 +70,10 @@ int main()
     for(auto line : f.readLines())
         cout << line << endl;;
     f.close();
+
+
+    cout << "\n--- Testing chrono function... ---" << endl;
+    testChrono();
 
     return 0;
 }

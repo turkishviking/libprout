@@ -23,7 +23,7 @@ set(CMAKE_CXX_STANDARD 17)
 # Infact, some legacy Find<package>.cmake files that require the C language to 
 # be enabled and thus using only CXX may cause issues. Note that by default when 
 # LANGUAGES is not specified CMake enables both CXX and C.
-project(libprout
+project(prout
         LANGUAGES CXX C
         VERSION 0.0.0.0)
 

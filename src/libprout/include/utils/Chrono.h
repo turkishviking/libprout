@@ -31,9 +31,9 @@ namespace prout {
         Chrono operator=(const Chrono &) = delete;
 
     public:
-        void startChrono(const std::string &chronoName);
-        void stopChrono(const std::string &chronoName);
-        void printChrono(const std::string &chronoName);
+        void start(const std::string &chronoName);
+        void stop(const std::string &chronoName);
+        void print(const std::string &chronoName);
 
     private:
         std::unordered_map<std::string, chronoInfo> _chronoMap;

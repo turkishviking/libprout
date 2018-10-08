@@ -18,7 +18,7 @@ prout::Chrono *prout::Chrono::get() {
 
 prout::Chrono::Chrono() {}
 
-void prout::Chrono::startChrono(const std::string &chronoName) {
+void prout::Chrono::start(const std::string &chronoName) {
     std::lock_guard<std::mutex> lock(chronoMutex);
     if (_chronoMap.find(chronoName) != _chronoMap.end()) {
         auto a = std::chrono::steady_clock::now();
@@ -31,14 +31,14 @@ void prout::Chrono::startChrono(const std::string &chronoName) {
     }
 }
 
-void prout::Chrono::stopChrono(const std::string &chronoName) {
+void prout::Chrono::stop(const std::string &chronoName) {
     std::lock_guard<std::mutex> lock(chronoMutex);
     if (_chronoMap.find(chronoName) != _chronoMap.end()) {
         _chronoMap.at(chronoName).stopTime = std::chrono::steady_clock::now();
     }
 }
 
-void prout::Chrono::printChrono(const std::string &chronoName) {
+void prout::Chrono::print(const std::string &chronoName) {
     std::lock_guard<std::mutex> lock(chronoMutex);
     if (_chronoMap.find(chronoName) != _chronoMap.end()) {
         auto diff = _chronoMap.at(chronoName).stopTime - _chronoMap.at(chronoName).startTime;

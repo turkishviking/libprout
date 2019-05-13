@@ -35,6 +35,7 @@ template <class ... Args>
 void print(Args &&... args)
 {
     print_(std::forward<Args>(args)...);
+    std::cout << std::endl;
 }
 
 static long getTimeStamp()

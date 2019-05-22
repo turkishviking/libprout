@@ -50,7 +50,7 @@ static std::string getUUID()
             (std::chrono::system_clock::now().time_since_epoch()).count()));
 }
 
-static std::vector<std::string> listDirs(const std::string&& pathName)
+static std::vector<std::string> listDirs(const std::string& pathName)
 {
     std::vector<std::string> v;
     for (auto & p : std::experimental::filesystem::directory_iterator(pathName))
@@ -64,7 +64,7 @@ static std::vector<std::string> listDirs(const std::string&& pathName)
     return v;
 }
 
-static std::vector<std::string> listFiles(const std::string&& pathName)
+static std::vector<std::string> listFiles(const std::string& pathName)
 {
     std::vector<std::string> v;
     for (auto & p : std::experimental::filesystem::directory_iterator(pathName))
@@ -79,7 +79,7 @@ static std::vector<std::string> listFiles(const std::string&& pathName)
 }
 
 
-static void makeFolder(std::string&& folder)
+static void makeFolder(std::string& folder)
 {
     if (mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == -1)
     {
@@ -93,7 +93,7 @@ static void makeFolder(std::string&& folder)
     }
 }
 
-static std::string replace(std::string&& str, const std::string&& from, const std::string&& to) {
+static std::string replace(std::string& str, const std::string& from, const std::string& to) {
     size_t start_pos = 0;
     while((start_pos = str.find(from, start_pos)) != std::string::npos) {
         str.replace(start_pos, from.length(), to);
@@ -102,7 +102,7 @@ static std::string replace(std::string&& str, const std::string&& from, const st
     return str;
 }
 
-static std::vector<std::string> split(std::string &&str, std::string delimiter)
+static std::vector<std::string> split(std::string &str, std::string delimiter)
 {
     size_t pos = 0;
     std::string token;

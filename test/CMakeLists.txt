@@ -6,7 +6,7 @@ set(${TEST_TARGET_NAME}_SRC
         test_prout_utilities.cpp
         ChronoTest.cpp
 )
-include_directories(../src/libprout/include)
+include_directories(../include)
 
 add_executable(${TEST_TARGET_NAME} ${${TEST_TARGET_NAME}_SRC})
 

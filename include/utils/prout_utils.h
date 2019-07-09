@@ -79,7 +79,7 @@ static std::vector<std::string> listFiles(const std::string& pathName)
 }
 
 
-static void makeFolder(std::string& folder)
+static void makeFolder(const std::string& folder)
 {
     if (mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == -1)
     {
@@ -93,27 +93,29 @@ static void makeFolder(std::string& folder)
     }
 }
 
-static std::string replace(std::string& str, const std::string& from, const std::string& to) {
+static std::string replace(const std::string& str, const std::string& from, const std::string& to) {
+    std::string out = str;
     size_t start_pos = 0;
-    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
-        str.replace(start_pos, from.length(), to);
+    while((start_pos = out.find(from, start_pos)) != std::string::npos) {
+        out.replace(start_pos, from.length(), to);
         start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
     }
-    return str;
+    return out;
 }
 
-static std::vector<std::string> split(std::string &str, std::string delimiter)
+static std::vector<std::string> split(const std::string &str, const std::string delimiter)
 {
+    std::string out = str;
     size_t pos = 0;
     std::string token;
     std::vector<std::string> result;
-    while ((pos = str.find(delimiter)) != std::string::npos) {
-        token = str.substr(0, pos);
+    while ((pos = out.find(delimiter)) != std::string::npos) {
+        token = out.substr(0, pos);
         if(token != "")
             result.push_back(token);
-        str.erase(0, pos + delimiter.length());
+        out.erase(0, pos + delimiter.length());
     }
-    result.push_back(str);
+    result.push_back(out);
     return result;
 }
 
